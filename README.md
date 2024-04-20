@@ -1,5 +1,5 @@
 # Why this repository?
-Well, in this repository I will add all my coding projects and like to collaborate with everybody and store it. My main skill is coding and like to make it a profession. My all projects and notes are available here. The name of this repository is "React-Python-Next-Javascript"!!
+Well, in this repository I will add all my coding projects and like to collaborate with everybody and store it. My main skill is coding and like to make it a profession. My all projects and notes are available here. The name of this repository is "React-Next-Javascript-Python-Flask"!!
 
 # What kind of projects?
 Well, every project is available that what a fresher does the first time like small enjoying games, blogging, all that what we need in day to day life, which make our life easy.
