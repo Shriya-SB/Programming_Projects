@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="recipe-details text-center py-8">
+
+    <!-- Display the recipe image if available -->
+    {% if recipe.image %}
+    <img src="{{ recipe.image }}" class="w-full h-[83vh]" alt="{{ recipe.title }}">
+    {% endif %}
+    <h1 class="text-4xl my-8" style="font-family: 'Bree Serif', serif;">{{ recipe.title }}</h1>
+    <div class="text-center mx-auto max-w-screen">
+
+        <!-- Ingredients section -->
+        <h2 class="section-title text-2xl my-3">Ingredients</h2>
+        <!-- Create an unordered list for displaying the ingredients -->
+        <ul class="ingredient-list max-w-screen">
+            <!-- Loop through each ingredient in the recipe's extendedIngredients -->
+            {% for ingredient in recipe.extendedIngredients %}
+            <li>{{ ingredient.original }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Instructions Section -->
+        <h2 class="section-title text-2xl my-3">Instructions</h2>
+        <ol class="instruction-list">
+            {% for step in recipe.analyzedInstructions[0].steps %}
+            <li>{{ step.step }}</li>
+            {% endfor %}
+        </ol>
+        <div class="my-4">
+
+            <a class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 my-3 px-4 capitalize rounded-md" href="/?search_query={{ search_query }}">Back to search results</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

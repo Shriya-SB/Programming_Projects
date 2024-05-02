@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-size: xx-large;
+            font-family: sans-serif;
+        }
+
+        section {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Calculator</h1>
+    <section>
+        <input type="number" name="opr1" id="opr1">
+        <select name="opr" id="opr">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="number" name="opr2" id="opr2">
+        <button onclick="calculate()">Submit</button>
+        <br>
+        <input type="number" name="result" id="result">
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

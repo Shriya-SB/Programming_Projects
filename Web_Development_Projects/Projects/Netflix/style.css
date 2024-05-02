@@ -1,0 +1,1272 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins';
+    overflow-x: hidden;
+    color: white;
+    background: rgba(13, 13, 13, 1);
+
+}
+
+.headers {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../Netflix/assets/images/bg.jpg");
+    background-size: cover;
+    position: relative;
+    object-fit: cover;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-repeat: no-repeat;
+
+    overflow-y: hidden;
+}
+
+nav {
+    display: flex;
+    min-width: 80vw;
+    position: absolute;
+    left: auto;
+    right: auto;
+
+    top: 35px;
+    /* height: 20vh; */
+    justify-content: space-between;
+    /* Add this line for vertical alignment */
+}
+
+
+nav .logo {
+    width: 150px;
+    position: relative;
+    margin-top: 5px;
+}
+
+@media (min-width: 375px) {
+    nav .logo {
+        width: 120px;
+        position: relative;
+        margin-top: 5px;
+    }
+
+}
+
+@media (min-width: 280px) {
+    nav .logo {
+        width: 95px;
+        position: relative;
+        margin-top: 5px;
+    }
+
+}
+
+@media (min-width: 640px) {
+    nav .logo {
+        width: 110px;
+        position: relative;
+        margin-top: 5px;
+    }
+}
+
+@media (min-width: 1024px) {
+    nav .logo {
+        width: 167px;
+        position: relative;
+        margin-top: 5px;
+    }
+}
+
+nav .buttons {
+    display: flex;
+    align-items: center;
+    /* Add this line for vertical alignment */
+}
+
+nav .buttons .english {
+    background: none;
+    border: 2px solid white;
+    padding: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 4px;
+    /* margin-top: 5px; */
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+nav .buttons button {
+    font-family: 'Poppins';
+    border-radius: 7px;
+    border: 2px solid black;
+    background: rgba(234, 4, 4, 0.977);
+
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 2px;
+    /* margin-top: 5px; */
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+nav .buttons button:hover {
+    cursor: pointer;
+    background: rgba(250, 9, 9, 1);
+}
+
+.headers .content {
+    align-self: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+
+    /* top: 40px; */
+    width: 100vw;
+}
+
+.headers .content p {
+    font-size: 25px;
+    font-family: sans-serif;
+    position: relative;
+    bottom: -40px;
+    z-index: 10;
+    font-weight: bold;
+    font-family: 'Poppins';
+}
+
+.headers .content h1 {
+    z-index: 10;
+    font-family: 'Poppins';
+    font-size: 49px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.headers .content h2 {
+    z-index: 10;
+    font-family: 'Poppins';
+    font-size: 25px;
+}
+
+main .separation {
+    background: rgb(54, 54, 54);
+    height: 10px;
+}
+
+main {
+    justify-content: center;
+    overflow-y: hidden;
+    /* display: flex; */
+}
+
+main .first {
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    margin: auto;
+    min-width: 90vw;
+    padding: 5px;
+}
+
+main .first div {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+main .first div>h1 {
+    font-size: 50px;
+}
+
+main .first .secImg {
+    position: relative;
+    height: 400px;
+    margin-top: 20px;
+    width: 400px;
+    overflow: hidden;
+}
+
+main .first .secImg img {
+    position: absolute;
+    z-index: 20;
+    height: 321px;
+    width: 500px;
+}
+
+main .first .secImg .secVdi {
+    position: absolute;
+    z-index: 10;
+}
+
+main .first .secVdi video {
+    position: absolute;
+    z-index: 10;
+    height: 100vh;
+    /* Set height and width to 100% to fill the container */
+    width: 100vw;
+    object-fit: cover;
+    /* Maintain aspect ratio */
+}
+
+main .first .content h1 {
+    font-size: 47px;
+}
+
+main .first .content {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+main .first .content p {
+    font-size: 17px;
+}
+
+main .second {
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    margin: auto;
+    max-width: 80vw;
+    padding: 5px;
+}
+
+main .second div {
+    display: flex;
+    margin: auto;
+}
+
+main .second .content {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+main .second div>h1 {
+    font-size: 50px;
+}
+
+main .second .content h1 {
+    font-size: 47px;
+
+}
+
+main .second .content p {
+    font-size: 17px;
+
+}
+
+main .second .secImg2 {
+    position: relative;
+    /* border: 10px solid white; */
+    height: 300px;
+    margin-top: 20px;
+    width: 590px;
+}
+
+main .second .secImg img {
+
+    height: 300px;
+    width: 610px;
+}
+
+main .third {
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    margin: auto;
+    max-width: 90vw;
+    padding: 5px;
+}
+
+main .third div {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+main .third div>h1 {
+    font-size: 50px;
+}
+
+main .third .secImg3 {
+    position: relative;
+    height: 400px;
+    margin-top: 20px;
+    width: 400px;
+    overflow: hidden;
+}
+
+main .third .secImg3 img {
+    position: absolute;
+    z-index: 20;
+    height: 321px;
+    width: 500px;
+}
+
+main .third .secImg3 .secVdi2 {
+    position: absolute;
+    z-index: 10;
+}
+
+main .third .secVdi2 video {
+    position: absolute;
+    z-index: 10;
+    height: 100vh;
+    /* Set height and width to 100% to fill the container */
+    width: 100vw;
+    object-fit: cover;
+    /* Maintain aspect ratio */
+}
+
+main .third .content h1 {
+    font-size: 47px;
+}
+
+main .third .content {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+main .third .content p {
+    font-size: 17px;
+}
+
+main .fourth {
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    margin: auto;
+    max-width: 80vw;
+    padding: 5px;
+}
+
+main .fourth div {
+    display: flex;
+    margin: auto;
+}
+
+main .fourth .content {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+main .fourth div>h1 {
+    font-size: 50px;
+}
+
+main .fourth .content h1 {
+    font-size: 47px;
+
+}
+
+main .fourth .content p {
+    font-size: 17px;
+
+}
+
+main .fourth .secImg4 {
+    position: relative;
+    /* border: 10px solid white; */
+    height: 300px;
+    margin-top: 20px;
+    width: 590px;
+}
+
+main .fourth .secImg4 img {
+
+    height: 300px;
+    width: 610px;
+}
+
+main .question {
+    font-size: 50px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+main .questions {
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+main .questions ul {
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+main .questions ul>li {
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw;
+    height: 8vh;
+    padding: 1rem;
+    font-size: 28px;
+    background: rgb(66, 65, 65);
+}
+
+main .questions ul>li>svg {
+    background: none;
+    position: absolute;
+    right: 0;
+    height: 40px;
+    top: 20px;
+    left: 50rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+}
+
+main .questions ul>li:hover {
+    background: rgb(50, 50, 50);
+    cursor: pointer;
+}
+
+@media (min-width: 280px) {
+    main .first {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        min-width: 90vw;
+        padding: 5px;
+    }
+
+    main .first div {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    main .first .secImg img {
+        position: absolute;
+        z-index: 20;
+        height: 281px;
+        width: 450px;
+    }
+
+    main .first .secImg {
+        position: relative;
+        height: 400px;
+        margin-top: 20px;
+        width: 360px;
+        overflow: hidden;
+    }
+
+    main .first .content {
+        margin-top: 29px;
+        text-align: center;
+    }
+
+    main .first .content h1 {
+        text-align: center;
+        font-size: 36px;
+    }
+
+    main .second {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        min-width: 90vw;
+        padding: 5px;
+    }
+
+    main .second div {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    main .second .secImg2 img {
+        position: absolute;
+        z-index: 20;
+        height: 281px;
+        width: 450px;
+    }
+
+    main .second .secImg2 {
+        position: relative;
+        height: 400px;
+        margin-top: 20px;
+        width: 360px;
+        overflow: hidden;
+    }
+
+    main .second .content {
+        margin-top: 29px;
+        text-align: center;
+    }
+
+    main .second .content h1 {
+        text-align: center;
+        font-size: 36px;
+    }
+
+    main .third {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        min-width: 90vw;
+        padding: 5px;
+    }
+
+    main .third div {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    main .third .secImg3 img {
+        position: absolute;
+        z-index: 20;
+        height: 281px;
+        width: 450px;
+    }
+
+    main .third .secImg3 {
+        position: relative;
+        height: 400px;
+        margin-top: 20px;
+        width: 360px;
+        overflow: hidden;
+    }
+
+    main .third .content {
+        margin-top: 29px;
+        text-align: center;
+    }
+
+    main .third .content h1 {
+        text-align: center;
+        font-size: 36px;
+    }
+
+    main .fourth {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        min-width: 90vw;
+        padding: 5px;
+    }
+
+    main .fourth div {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    main .fourth .secImg4 img {
+        position: absolute;
+        z-index: 20;
+        height: 281px;
+        width: 450px;
+    }
+
+    main .fourth .secImg4 {
+        position: relative;
+        height: 400px;
+        margin-top: 20px;
+        width: 360px;
+        overflow: hidden;
+    }
+
+    main .fourth .content {
+        margin-top: 29px;
+        text-align: center;
+    }
+
+    main .fourth .content h1 {
+        text-align: center;
+        font-size: 36px;
+    }
+
+    main .question {
+        font-size: 40px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        margin-top: 15px;
+    }
+
+    main .questions {
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+
+    main .questions ul {
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+
+    main .questions ul>li {
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80vw;
+        height: 1.9vh;
+        font-size: 14px;
+        background: rgb(66, 65, 65);
+        overflow-y: hidden;
+    }
+
+    main .questions ul>li>svg {
+        background: none;
+        height: 30px;
+        position: absolute;
+        top: 8px;
+        right: 0;
+        left: 348px;
+    }
+
+    main .questions ul>li:hover {
+        background: rgb(50, 50, 50);
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 640px) {
+    main .first {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        min-width: 90vw;
+        padding: 5px;
+    }
+
+    main .first div {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    main .first .secImg img {
+        position: absolute;
+        z-index: 20;
+        height: 281px;
+        width: 450px;
+    }
+
+    main .first .secImg {
+        position: relative;
+        height: 400px;
+        margin-top: 20px;
+        width: 360px;
+        overflow: hidden;
+    }
+
+    main .first .content {
+        margin-top: 29px;
+        text-align: center;
+    }
+
+    main .first .content h1 {
+        text-align: center;
+        font-size: 36px;
+    }
+
+    main .second {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        min-width: 90vw;
+        padding: 5px;
+    }
+
+    main .second div {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    main .second .secImg2 img {
+        position: absolute;
+        z-index: 20;
+        height: 281px;
+        width: 450px;
+    }
+
+    main .second .secImg2 {
+        position: relative;
+        height: 400px;
+        margin-top: 20px;
+        width: 360px;
+        overflow: hidden;
+    }
+
+    main .second .content {
+        margin-top: 29px;
+        text-align: center;
+    }
+
+    main .second .content h1 {
+        text-align: center;
+        font-size: 36px;
+    }
+
+    main .third {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        min-width: 90vw;
+        padding: 5px;
+    }
+
+    main .third div {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    main .third .secImg3 img {
+        position: absolute;
+        z-index: 20;
+        height: 281px;
+        width: 450px;
+    }
+
+    main .third .secImg3 {
+        position: relative;
+        height: 400px;
+        margin-top: 20px;
+        width: 360px;
+        overflow: hidden;
+    }
+
+    main .third .content {
+        margin-top: 29px;
+        text-align: center;
+    }
+
+    main .third .content h1 {
+        text-align: center;
+        font-size: 36px;
+    }
+
+    main .fourth {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        min-width: 90vw;
+        padding: 5px;
+    }
+
+    main .fourth div {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    main .fourth .secImg4 img {
+        position: absolute;
+        z-index: 20;
+        height: 281px;
+        width: 450px;
+    }
+
+    main .fourth .secImg4 {
+        position: relative;
+        height: 400px;
+        margin-top: 20px;
+        width: 360px;
+        overflow: hidden;
+    }
+
+    main .fourth .content {
+        margin-top: 29px;
+        text-align: center;
+    }
+
+    main .fourth .content h1 {
+        text-align: center;
+        font-size: 36px;
+    }
+
+    main .question {
+        font-size: 35px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (min-width: 1184px) {
+    main .first {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+        min-width: 90vw;
+        padding: 5px;
+    }
+
+    main .first div {
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+    main .first div>h1 {
+        font-size: 50px;
+    }
+
+    main .first .secImg {
+        position: relative;
+        height: 400px;
+        margin-top: 20px;
+        width: 400px;
+        overflow: hidden;
+    }
+
+    main .first .secImg img {
+        position: absolute;
+        z-index: 20;
+        height: 321px;
+        width: 500px;
+    }
+
+    main .first .secImg .secVdi {
+        position: absolute;
+        z-index: 10;
+    }
+
+    main .first .secVdi video {
+        position: absolute;
+        z-index: 10;
+        height: 100vh;
+        /* Set height and width to 100% to fill the container */
+        width: 100vw;
+        object-fit: cover;
+        /* Maintain aspect ratio */
+    }
+
+    main .first .content h1 {
+        font-size: 47px;
+    }
+
+    main .first .content {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    main .first .content p {
+        font-size: 17px;
+    }
+
+    main .second {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+        max-width: 80vw;
+        padding: 5px;
+    }
+
+    main .second div {
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+    }
+
+    main .second .content {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    main .second div>h1 {
+        font-size: 50px;
+    }
+
+    main .second .content h1 {
+        font-size: 47px;
+
+    }
+
+    main .second .content p {
+        font-size: 17px;
+
+    }
+
+    main .second .secImg2 {
+        position: relative;
+        /* border: 10px solid white; */
+        height: 300px;
+        margin-top: 20px;
+        width: 590px;
+    }
+
+    main .second .secImg img {
+
+        height: 300px;
+        width: 610px;
+    }
+
+    main .third {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+        max-width: 90vw;
+        padding: 5px;
+    }
+
+    main .third div {
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+    main .third div>h1 {
+        font-size: 50px;
+    }
+
+    main .third .secImg3 {
+        position: relative;
+        height: 400px;
+        margin-top: 20px;
+        width: 400px;
+        overflow: hidden;
+    }
+
+    main .third .secImg3 img {
+        position: absolute;
+        z-index: 20;
+        height: 321px;
+        width: 500px;
+    }
+
+    main .third .secImg3 .secVdi2 {
+        position: absolute;
+        z-index: 10;
+    }
+
+    main .third .secVdi2 video {
+        position: absolute;
+        z-index: 10;
+        height: 100vh;
+        /* Set height and width to 100% to fill the container */
+        width: 100vw;
+        object-fit: cover;
+        /* Maintain aspect ratio */
+    }
+
+    main .third .content h1 {
+        font-size: 47px;
+    }
+
+    main .third .content {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    main .third .content p {
+        font-size: 17px;
+    }
+
+    main .fourth {
+        justify-content: center;
+        align-items: center;
+
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+        max-width: 80vw;
+        padding: 5px;
+    }
+
+    main .fourth div {
+        display: flex;
+        flex-direction: row;
+        margin: auto;
+    }
+
+    main .fourth .content {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    main .fourth div>h1 {
+        font-size: 50px;
+    }
+
+    main .fourth .content h1 {
+        font-size: 47px;
+
+    }
+
+    main .fourth .content p {
+        font-size: 17px;
+
+    }
+
+    main .fourth .secImg4 {
+        position: relative;
+        /* border: 10px solid white; */
+        height: 300px;
+        margin-top: 20px;
+        width: 590px;
+    }
+
+    main .fourth .secImg4 img {
+
+        height: 300px;
+        width: 610px;
+    }
+
+    main .question {
+        font-size: 50px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        margin-top: 15px;
+    }
+
+    main .questions {
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+
+    main .questions ul {
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+
+    main .questions ul>li {
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80vw;
+        height: 6.6vh;
+        font-size: 28px;
+        background: rgb(66, 65, 65);
+    }
+
+    main .questions ul>li>svg {
+        background: none;
+        position: absolute;
+        right: 0;
+        height: 40px;
+        top: 20px;
+        left: 50rem;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: auto;
+    }
+
+    main .questions ul>li:hover {
+        background: rgb(50, 50, 50);
+        cursor: pointer;
+    }
+
+}
+
+.faq h2 {
+    text-align: center;
+    font-size: 48px;
+}
+
+.faq {
+    background: black;
+    color: white;
+    padding: 34px;
+}
+
+.faqbox:hover {
+    background-color: #414141;
+    color: white;
+}
+
+.faqbox svg {
+    filter: invert(1);
+}
+
+.faqbox {
+    transition: all 1s ease-out;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #2d2d2d;
+    padding: 24px;
+    max-width: 60vw;
+    margin: 34px auto;
+    cursor: pointer;
+}
+
+footer {
+    color: white;
+    max-width: 60vw;
+    margin: auto;
+    padding: 60px;
+}
+
+footer .questions2 {
+    padding: 34px 0;
+}
+
+
+.footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    color: white;
+}
+
+
+
+@media screen and (max-width: 1300px) {
+
+    nav {
+        max-width: 90vw;
+    }
+
+    .first {
+        flex-wrap: wrap;
+    }
+
+    .secImg img {
+        width: 305px;
+    }
+
+    .secImg video {
+        width: 305px;
+    }
+
+    .hero> :nth-child(1) {
+        font-size: 32px;
+    }
+
+    .hero> :nth-child(2) {
+        font-size: 18px;
+    }
+
+    .hero> :nth-child(3) {
+        font-size: 18px;
+    }
+
+    .faq h2 {
+        text-align: center;
+        font-size: 32px;
+    }
+
+    footer {
+        max-width: 90vw;
+        padding: 75px 0;
+    }
+
+    .footer-item {
+        align-items: center;
+    }
+
+
+}
+
+
+
+@media screen and (max-width: 1300px) {
+
+    .footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+}
+
+
+.footer a {
+    font-size: 14px;
+    color: white;
+}
+
+.footer-item {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}

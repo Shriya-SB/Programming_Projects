@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Example</title>
+</head>
+
+<style>
+    .box {
+        height: 45px;
+        width: 56px;
+        border: 2px solid black;
+        margin: 5px;
+        padding: 5px;
+    }
+</style>
+
+<body>
+    <div class="container" id="container">
+        <div class="box" id="blog">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box" id="redbox">Box 3</div>
+        <div class="box">Box 4</div>
+        <div class="box" id="box" name="box">Box 5</div>
+    </div>
+</body>
+
+<script>
+    // DOM manipulation script
+    // Changes the title of the website
+    document.title = "DOM Example";
+
+    // Outputs the body of HTML to the console
+    console.log(document.body);
+
+    // Changes the background color of the body to green
+    document.body.style.backgroundColor = "green";
+
+    // Selects the first element of the body
+    let firstElement = document.body.firstElementChild;
+
+    // Retrieves the child nodes and children of the first element
+    let childNodes = firstElement.childNodes;
+    let children = firstElement.children;
+
+    console.log(firstElement, childNodes, children);
+
+    // Targeting elements using document
+    let boxes = document.getElementsByClassName("box");
+
+    // Outputs the collection of elements with the class "box" to the console
+    console.log(boxes);
+
+    // Changes the background color of the third box to red
+    boxes[2].style.backgroundColor = "red";
+
+    // Changes the background color of the element with id "redbox" to red
+    document.getElementById("redbox").style.backgroundColor = "red";
+
+    // Changes the background color of the first element with the class "box" to green
+    document.querySelector(".box").style.backgroundColor = "green";
+
+    // Changes the background color of all elements with the class "box" to purple using forEach
+    document.querySelectorAll(".box").forEach(element => {
+        element.style.backgroundColor = "purple";
+    });
+
+    // Introduction to BOM - Browser Object Model
+    // BOM represents additional tools and objects
+    // BOM provides many html block of code and API by default
+    // For example, console API, alert, confirm, prompt etc.
+    // alert, confirm, prompts three of it has blocking nature. It means unless we won't respond it will pause our code execution for a while. Try to avoid them.
+
+    // Console API
+    console.log('Hello World'); // This method is used to print messages.
+    console.error('Some Error Occurred!'); // This method is used to print errors.
+    console.warn('Its your last warning!'); // This method is used to print warnings.
+    console.clear() // It clears all consoles in terminal
+    let x = 5;
+    // Using console.assert to check if x is greater than 10
+    console.assert(x > 10, 'Assertion failed: x should be greater than 10');
+    // The above assertion is false, so the error message will be logged to the console
+    console.info('Nothing') // It's similar to console.log()
+    function performTask(taskName) {
+        console.count(`Task: ${taskName}`);
+
+        // Your task logic here
+        console.log(`Executing ${taskName}...`);
+    }
+
+    performTask('Task A'); // Output: Task: Task A: 1, Executing Task A...
+    performTask('Task B'); // Output: Task: Task B: 1, Executing Task B...
+    performTask('Task A'); // Output: Task: Task A: 2, Executing Task A...
+    performTask('Task C'); // Output: Task: Task C: 1, Executing Task C...
+    performTask('Task B'); // Output: Task: Task B: 2, Executing Task B...
+    const fruits = [
+        { name: 'Apple', color: 'Red', taste: 'Sweet' },
+        { name: 'Banana', color: 'Yellow', taste: 'Sweet' },
+        { name: 'Grapes', color: 'Purple', taste: 'Sweet' },
+    ];
+
+    console.table(fruits); // Arrange data in tabular form.
+
+    // alert
+    alert('Hello World') // Alert is also used to display messages but alert is. It's like a mini window screen.
+
+    // confirm
+    confirm("Do you like to continue?") // Confirm interface is also like alert. It ask cancel or ok. We have to choose one.
+
+    // prompt
+    prompt('Enter your phone number:') // Basically it is similar to alert and confirm interface but it demands for an input from user. 
+
+    // Attribute Methods
+    let l = document.getElementById('box');
+    l.hasAttribute("name") // Returns boolean according to condition.
+    console.log(l);
+
+    l.setAttribute('class', 'gold box') // Add's a new class element gold
+    console.log(l);
+
+    // Remove only the "gold" class while keeping other classes intact
+    l.classList.remove('gold');
+    console.log(l);
+
+    console.log(l.getAttribute('name')); // get the attribute value.
+
+    // Method Of Insertion.
+    let div = document.createElement('div'); // Create a new element of div tag
+    div.className = "myDiv" // You can add a class
+    div.id = "myDev"
+    div.innerHTML = "<h1>My name is Navneet.</h1>" // Add content in it
+    let cont = document.getElementById('container') 
+    cont.appendChild(div) // Append this element in your parent as a child.
+</script>
+
+</html>
