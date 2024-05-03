@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-
+import About from "./components/About";
+import Navbar from "./Components/Navbar";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import NoteState from "./context/notes/NoteState";
+// import AddNote from "./components/AddNote";
+import Home from "./components/Home";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import Contact from "./components/Contact";
+import Alert from "../src/components/Alert";
+import { useState } from "react";
+// This is my app initiallized from git.
 function App() {
+  const [alert, setAlert] = useState(null)
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type
+    }) 
+    // Give alert.
+    setTimeout(() => {
+      setAlert(null)
+    }, 1500);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // Add router so that the page dosn't reload.
+    <>
+      <Router>
+        <Navbar showAlert={showAlert}/>
+        <Alert alert={alert} />
+        <NoteState showAlert={showAlert}>
+          <Routes>
+            <Route exact path="/about" element={<About />} />
+            <Route exact path="/" element={<Home showAlert={showAlert} />} />
+            <Route exact path="/login" element={<Login showAlert={showAlert} />} />
+            <Route exact path="/signup" element={<Signup showAlert={showAlert} />} />
+            <Route exact path="/contact" element={<Contact showAlert={showAlert} />} />
+          </Routes>
+        </NoteState>
+      </Router>
+    </>
   );
 }
 
