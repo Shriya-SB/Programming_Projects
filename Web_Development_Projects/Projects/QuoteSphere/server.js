@@ -10,7 +10,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "templates/index.html"));
 });
 
-// Define a route to handle quote generation.
 app.get('/generator', async (req, res) => {
     try {
         const options = {
@@ -23,8 +22,7 @@ app.get('/generator', async (req, res) => {
         };
         
         const response = await axios.request(options);
-        const quote = response.data.quote;
-        
+        const quote = response.data[0].quote;
         // Send the quote back to the client
         res.send(quote);
     } catch (error) {
@@ -32,6 +30,7 @@ app.get('/generator', async (req, res) => {
         res.status(500).send('Error fetching quote');
     }
 });
+
 
 // Listen for the app
 app.listen(port, () => { console.log(`Server is running at http://localhost:${port}`); });
