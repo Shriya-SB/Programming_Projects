@@ -2,12 +2,10 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 const Navbar = (props) => {
   const { showAlert } = props;
-  const token = localStorage.getItem('token');
+  const token = JSON.parse(localStorage.getItem('vnotebook'))
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    localStorage.removeItem('useremail');
+    localStorage.removeItem('vnotebook');
     showAlert("User Logged-Out successfully!!", 'success');
     navigate("/login");
   }
@@ -31,7 +29,7 @@ const Navbar = (props) => {
                 <Link className="nav-link" to="/contact">Contact</Link>
               </li>
             </ul>
-            {!token ?
+            {!token.token ?
               (
                 <form className="d-flex" role="search">
                   <Link to="/login" className='btn btn-sm btn-primary'>Login</Link>
