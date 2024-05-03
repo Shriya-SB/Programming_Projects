@@ -1,7 +1,9 @@
 // In this code we will create an signup component which will create an new users and register them in my mongodb.
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = (props) => {
+  const navigate = useNavigate()
   // Create an state to define the elements of signup.
   const [credentials, setCredentials] = useState({ name: '', email: '', password: '' });
   // Create an onChange to access input fields
@@ -25,11 +27,17 @@ const Signup = (props) => {
       const json = await res.json();
       const { showAlert } = props; //Display the alert to user.
       // Save the details except the password
-      localStorage.setItem('vnotebook', JSON.stringify({ token: json.authtoken, email: json.user.email, _id: json.user._id }));
-      showAlert('User account created successfully!!', 'success'); //Display alert
-      setCredentials({ name: '', email: '', password: '' });
-      console.log(json);
-      window.location.href = '/';
+      if (json.success) {
+        localStorage.setItem('vnotebook', JSON.stringify({ token: json.authtoken, email: json.user.email, _id: json.user._id }));
+        showAlert('User account created successfully!!', 'success'); //Display alert
+        setCredentials({ name: '', email: '', password: '' });
+        setTimeout(() => {
+          navigate('/')
+        }, 2000);
+      }else{
+        showAlert('Some Error Occurred!!', 'danger'); //Display alert
+
+      }
     } catch (error) { //Show other errors which are not related to it but critical.
       console.log(error);
     }

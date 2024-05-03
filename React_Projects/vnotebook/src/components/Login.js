@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Login = (props) => {
-    const [credentials, setCredentials] = useState({email: "", password: ""});
+    const [credentials, setCredentials] = useState({ email: "", password: "" });
     let navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -12,30 +12,29 @@ const Login = (props) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({email: credentials.email, password: credentials.password})
+            body: JSON.stringify({ email: credentials.email, password: credentials.password })
         });
         const json = await response.json();
-        if (json.success || json.status === 201){
+        if (json.success) {
             // Save the auth token and redirect
-            localStorage.setItem('token', json.authtoken); 
-            localStorage.setItem('useremail', json.user.email); 
-            localStorage.setItem('userID', json.user._id); 
-            localStorage.setItem('userDate', json.user.date); 
+            localStorage.setItem('vnotebook', JSON.stringify({ token: json.authtoken, email: json.user.email, _id: json.user._id }));
             props.showAlert("Successfully logged-In!!", 'success');
-            navigate('/');
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
         }
-        else{
+        else {
             props.showAlert("Invalid Credentials!!", 'danger');
         }
     }
 
-    const onChange = (e)=>{
-        setCredentials({...credentials, [e.target.name]: e.target.value});
+    const onChange = (e) => {
+        setCredentials({ ...credentials, [e.target.name]: e.target.value });
     }
 
     return (
         <div className='container'>
-            <form  onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
                     <input type="email" className="form-control" value={credentials.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" />
