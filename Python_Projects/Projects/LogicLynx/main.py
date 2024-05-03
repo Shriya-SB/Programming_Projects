@@ -2,12 +2,12 @@
 import speech_recognition as sr  # For voice recognition.
 import os  # For working with the operating system.
 import webbrowser  # For opening websites.
-import openai  # For interfacing with OpenAI's GPT-3.
 import datetime  # For getting the current time.
 import pyttsx3  # For text-to-speech conversion.
 import cv2  # For webcam access.
-from config import api_key  # Set the OpenAI API key.
 import threading  # Import the threading module.
+import requests
+
 
 # Let the current chat be blank.
 chatStr = ""
@@ -19,25 +19,36 @@ def chat(query):
     global chatStr
     # Print the chat conversation with the user.
     print(chatStr)
-    # Print the response.
-    openai.api_key = api_key
     # Print what the user said
     chatStr += f"User: {query}\n LogicLynx: "
-    # Generate a response using GPT-3
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=chatStr,
-        temperature=1,
-        max_tokens=256,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0
-    )
+    url = "https://open-ai21.p.rapidapi.com/conversationgpt35"
+
+    payload = {
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": query
+                    }
+                ],
+                "web_access": True,
+                "system_prompt": query,
+                "temperature": 0.9,
+                "top_k": 5,
+                "top_p": 0.9,
+                "max_tokens": 256
+            }
+    headers = {
+                "content-type": "application/json",
+                "X-RapidAPI-Key": "5e0b58d473mshe8d525e781c02d1p1bde9fjsnc6b41a538d30",
+                "X-RapidAPI-Host": "open-ai21.p.rapidapi.com"
+            }
+
+    response = requests.post(url, json=payload, headers=headers)
     # Tie the function in try block so that we can prevent errors.
     try:
-        say(response["choices"][0]["text"])  # Speak the response
-        chatStr += f"{response['choices'][0]['text']}\n"  # Store the response in chat history.
-        return response["choices"][0]["text"]  # Return the response.
+        say(response.json()['result'])  # Speak the response
+        chatStr += f"{response.json()['result']}\n"  # Store the response in chat history.
+        return response.json()['result']  # Return the response.
     except Exception as error:
         print(f'LogicLynx: Some error occurred, {error}')
         say("Some error occurred from LogicLynx")
@@ -45,24 +56,35 @@ def chat(query):
 
 # Function to interact with GPT-3.
 def ai(prompt):
-    # Set the OpenAI API key.
-    openai.api_key = api_key
     # Initialize the result text.
     chat_name = ''.join(prompt.split('intelligence')[1:]).strip()
 
     text = f"OpenAI response for Prompt: {prompt} \n *************************\n\n"
-    # Generate a response using GPT-3.
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=prompt,
-        temperature=1,
-        max_tokens=256,
-        top_p=1,
-        frequency_penalty=0,
-        presence_penalty=0
-    )
+    url = "https://open-ai21.p.rapidapi.com/conversationgpt35"
+
+    payload = {
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ],
+                "web_access": True,
+                "system_prompt": prompt,
+                "temperature": 0.9,
+                "top_k": 5,
+                "top_p": 0.9,
+                "max_tokens": 256
+            }
+    headers = {
+                "content-type": "application/json",
+                "X-RapidAPI-Key": "5e0b58d473mshe8d525e781c02d1p1bde9fjsnc6b41a538d30",
+                "X-RapidAPI-Host": "open-ai21.p.rapidapi.com"
+            }
+
+    response = requests.post(url, json=payload, headers=headers)
     try:
-        text += response["choices"][0]["text"]  # Append the response to the result text.
+        text += response.json()['result']  # Append the response to the result text.
         # Create a directory for Openai files if it doesn't exist.
         if not os.path.exists("Openai"):
             os.mkdir("Openai")
@@ -123,8 +145,7 @@ def open_camera():
 # Main execution.
 if __name__ == '__main__':
     print('Welcome to LogicLynx A.I')
-    say("Welcome to JES Public School Science Exhibition in the field of Robotics. My name is LogicLynx, the most advanced AI "
-        "assistant. You can ask any type of question and get feedback!!")
+    say("My name is logiclynx most advanced AI assistant, you can ask any type of question and get a feedback!")
     while True:
         try:
             print("Listening...")

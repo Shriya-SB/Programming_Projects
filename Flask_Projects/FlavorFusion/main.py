@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 # Replace with your Spoonacular API key
 API_KEY = 'de6dc34458474916a0a189944ddca40b'
-# API_KEY=""
 
 # Define the route for the "Home" button
 @app.route('/home', methods=['GET'])
