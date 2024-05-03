@@ -1,0 +1,16 @@
+[
+    {
+        "Student ID":"5000",
+        "Name":"Navneet S Bhandare",
+        "Subjects":{
+            "Maths":68,
+            "Science":68,
+            "English":80,
+            "Hindi":75,
+            "CS":90,
+            "Social Science":87
+        },
+        "Percentage":"78.00%",
+        "Address":"Wind flower apartment, Kengunte, Mallathalli, MPM park, Nagarbhavi, Bengaluru"
+    }
+]

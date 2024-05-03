@@ -2,12 +2,15 @@
 import pandas as pd
 import os
 
+# Create a class for this project
 class StudentGradeTracker:
+    # Write a constructor to initilize there values!
     def __init__(self):
-        self.file_name = 'student_records.json'
-        self.file_path = os.path.join(os.path.dirname(__file__), self.file_name)
-        self.load_data()
+        self.file_name = 'student_records.json' # File name!
+        self.file_path = os.path.join(os.path.dirname(__file__), self.file_name) # File path!
+        self.load_data() # Call the function for completing the task!
 
+    # Load the data present!
     def load_data(self):
         try:
             self.data = pd.read_json(self.file_path)
@@ -15,6 +18,7 @@ class StudentGradeTracker:
             print("No existing data file found. Starting with an empty database.")
             self.data = pd.DataFrame(columns=['Student ID', 'Name', 'Subjects', 'Percentage', 'Address'])
 
+    # Save the record in json format!
     def save_data(self):
         self.data.to_json(self.file_path, orient='records', indent=4)
 
@@ -49,6 +53,7 @@ class StudentGradeTracker:
             'Address': address
         }
 
+        # Frame the data and save it inside the file!
         self.data = pd.concat([self.data, pd.DataFrame([new_entry])], ignore_index=True)
         self.save_data()
         print("Student record added successfully.")
