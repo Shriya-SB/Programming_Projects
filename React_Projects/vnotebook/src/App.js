@@ -1,12 +1,11 @@
 import About from "./components/About";
-import Navbar from "./Components/Navbar";
+import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import NoteState from "./context/notes/NoteState";
 // import AddNote from "./components/AddNote";
 import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import Contact from "./components/Contact";
 import Alert from "../src/components/Alert";
 import { useState } from "react";
 // This is my app initiallized from git.
@@ -34,7 +33,6 @@ function App() {
             <Route exact path="/" element={<Home showAlert={showAlert} />} />
             <Route exact path="/login" element={<Login showAlert={showAlert} />} />
             <Route exact path="/signup" element={<Signup showAlert={showAlert} />} />
-            <Route exact path="/contact" element={<Contact showAlert={showAlert} />} />
           </Routes>
         </NoteState>
       </Router>

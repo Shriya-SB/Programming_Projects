@@ -4,7 +4,7 @@ import { useState } from "react";
 const NoteState = (props) => {
   const { showAlert } = props
   const [notes, setNotes] = useState([]);
-  let token = localStorage.getItem('token')
+  let token = JSON.parse(localStorage.getItem('vnotebook'))
   // Get all Notes
   const getNotes = async () => {
     try {
@@ -12,10 +12,11 @@ const NoteState = (props) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': token
+          'auth-token': token.token
         }
       });
       const responseData = await response.json();
+      console.log(responseData);
       const fetchedNotes = responseData.notes; // Extract the "notes" property
       setNotes(fetchedNotes);
 
@@ -31,7 +32,7 @@ const NoteState = (props) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': token
+          'auth-token': token.token
         },
         body: JSON.stringify({ title, desc, tag })
       });
@@ -61,7 +62,7 @@ const NoteState = (props) => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': token
+          'auth-token': token.token
         }
       });
       const json = await response.json();
@@ -86,7 +87,7 @@ const NoteState = (props) => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": token
+          "auth-token": token.token
         },
         body: JSON.stringify({ title, desc, tag })
       });

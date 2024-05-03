@@ -5,7 +5,6 @@ const { body, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const JWT_KEY = "NavneetIsAGoodDeveloper@@@$$$000"
-const Contact = require('../models/Contact')
 const fetchuser = require('../middleware/fetchuser')
 
 router.post('/createuser', [
@@ -75,30 +74,4 @@ router.post("/login", [
     }
 })
 
-router.post("/contact", fetchuser, [
-    body("name").isLength({ min: 2 }),
-    body("email").isEmail(),
-    body('phone').isLength({ min: 9 }),
-    body('desc').isLength({ min: 2 })
-], async(req, res) => {
-    // Make sure everything is coming from req
-    const errors = validationResult(req)
-        // Make sure no field is empty
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ success: false, error: errors.array() })
-    }
-    const { email, name, desc, phone } = req.body;
-    try {
-        const credentials = new Contact({
-            name: name,
-            email: email,
-            desc: desc,
-            phone: phone
-        })
-        const response = await credentials.save()
-        return res.status(200).json({ success: true, message: 'Data sent successfully!!', credentials, response })
-    } catch (error) {
-        return res.status(400).json({ success: false, error: 'Cannot send the data!!' })
-    }
-})
 module.exports = router

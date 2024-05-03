@@ -25,13 +25,10 @@ const Signup = (props) => {
       const json = await res.json();
       const { showAlert } = props; //Display the alert to user.
       // Save the details except the password
-      localStorage.setItem('token', json.authtoken);
-      localStorage.setItem('username', json.user.name);
-      localStorage.setItem('useremail', json.user.email);
-      localStorage.setItem('userDate', json.user.date);
-      localStorage.setItem('userID', json.user._id);
+      localStorage.setItem('vnotebook', JSON.stringify({ token: json.authtoken, email: json.user.email, _id: json.user._id }));
       showAlert('User account created successfully!!', 'success'); //Display alert
       setCredentials({ name: '', email: '', password: '' });
+      console.log(json);
       window.location.href = '/';
     } catch (error) { //Show other errors which are not related to it but critical.
       console.log(error);
@@ -40,7 +37,7 @@ const Signup = (props) => {
 
   return (
     <>
-    {/* Add html to it. */}
+      {/* Add html to it. */}
       <form method="POST" onSubmit={handleSubmit}>
         <h1 className="text-center">Sign Up</h1>
         <p className="text-center">We are here to keep your data secure.</p>

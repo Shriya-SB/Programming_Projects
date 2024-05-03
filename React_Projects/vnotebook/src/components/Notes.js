@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 const Notes = () => {
     const { notes, getNotes, editNote } = useContext(NoteContext);
     const [note, setNote] = useState({ id: '', etitle: '', edesc: '', etag: '' });
-    let tokens = localStorage.getItem('token');
     const navigate = useNavigate();
     useEffect(() => {
+        let tokens = JSON.parse(localStorage.getItem('vnotebook'));
         if (!tokens) {
             navigate('/login');
         }
@@ -76,10 +76,9 @@ const Notes = () => {
             <div className="row my-2 mx-auto" style={{ marginLeft: '85px' }}>
                 <div className="align-items-center justify-content-center container text-center mx-auto">
                     {notes.length === 0 ? <h6>No Notes to display</h6> :
-                        Array.isArray(notes) &&
-                        notes.map((note) => (
-                            <NoteItem note={note} key={note._id} updateNote={updateNote} />
-                        ))
+                        Array.isArray(notes) && notes.map((note) => {
+                            return <NoteItem note={note} key={note._id} updateNote={updateNote} />
+                        })
                     }
                 </div>
             </div>
