@@ -184,7 +184,7 @@ const Manager = () => {
             />
             <div className="min-h-screen justify-center font-[poppins] items-center mx-auto bg-teal-50">
                 <div className='justify-center items-center mx-auto py-4 text-center'>
-                    <img src="/key.jpeg" alt="KeyKrypt" className='lg:h-[7rem] h-[4rem] rounded-full justify-center items-center mx-auto text-center w-[20rem]' />
+                    <img src="/key.jpeg" alt="KeyKrypt" className='lg:h-[7rem] h-[4rem] rounded-full justify-center items-center mx-auto text-center w-[10rem] lg:w-[20rem]' />
                 </div>
                 <div className="container justify-center items-center m-auto">
                     <form onSubmit={savePassword} method="POST">
@@ -205,19 +205,19 @@ const Manager = () => {
                         <h1 className="mx-1 md:mx-[10%] my-4 text-3xl">Your Passwords</h1>
                     </form>
                     {PasswordArray.length === 0 && <div className='text-3xl text-center font-bold my-5'>No passwords found!!</div>}
-                    {PasswordArray.length !== 0 && <table className="table-auto mx-auto rounded-md overflow-hidden w-[80%] justify-center items-center my-10">
+                    {PasswordArray.length !== 0 && <table className="table-auto lg:mx-auto rounded-md overflow-hidden mx-4 w-[80%] justify-center items-center my-10">
                         <thead className='bg-teal-400 '>
                             <tr>
-                                <th className='text-2xl py-3 border'>Username</th>
-                                <th className='text-2xl py-3 border'>Webname</th>
-                                <th className='text-2xl py-3 border'>Passwords</th>
+                                <th className='lg:text-2xl text-lg py-3 border'>Username</th>
+                                <th className='lg:text-2xl text-lg py-3 border'>Webname</th>
+                                <th className='lg:text-2xl text-lg py-3 border'>Passwords</th>
                             </tr>
                         </thead>
                         <tbody className='bg-teal-200 border'>
                             {PasswordArray.map((item, index) => {
                                 return <tr key={index}>
-                                    <td className='text-center border text-xl py-1'>{item.username}</td>
-                                    <td className='text-center border text-xl py-1'>{item.webname}</td>
+                                    <td className='text-center border lg:text-xl text-md py-1'>{item.username}</td>
+                                    <td className='text-center border lg:text-xl text-md py-1'>{item.webname}</td>
                                     <td className='text-center border space-x-4 flex items-center text-2xl justify-center py-1'>
                                         <p>{"*".repeat(item.password.length)}</p>
                                         <span onClick={() => editPassword(item.id)}>
