@@ -40,14 +40,14 @@ const Navbar = ({ darkMode, cart, addToCart, removeFromCart, clearCart, subTotal
                     <FaSearch className='text-white bg-purple-600 rounded-md hover:bg-purple-700 w-[14vw] xl:w-[3.4rem] xl:h-[2.5rem] text-4xl p-2 sm:w-[3.5rem] cursor-pointer' />
                 </div>
                 <div className='parentOfNav flex flex-col lg:flex-row'>
-                    <nav ref={menuRef} className={`lg:my-3 2xl:w-[35rem] flex lg:static absolute right-0 ${darkMode ? "lg:dark:bg-gray-900 bg-gray-500 dark:text-white" : "lg:bg-gray-50 bg-gray-200"} transition-transform lg:translate-x-0 lg:transition-none lg:transform-none transform translate-x-full lg:mx-0 lg:top-0 lg:justify-normal lg:items-start lg:text-start justify-center items-center text-center mx-auto space-x-0 lg:space-x-8 lg:space-y-0 top-32 py-3 lg:py-0 space-y-5 lg:mr-4 2xl:mr-0 w-screen lg:w-full`}>
+                    <nav ref={menuRef} className={`lg:my-3 2xl:w-[37rem] flex lg:static absolute right-0 ${darkMode ? "lg:dark:bg-gray-900 bg-gray-500 dark:text-white" : "lg:bg-gray-50 bg-gray-200"} transition-transform lg:translate-x-0 lg:transition-none lg:transform-none transform translate-x-full lg:mx-0 lg:top-0 lg:justify-normal lg:items-start lg:text-start justify-center items-center text-center mx-auto space-x-0 lg:space-x-8 lg:space-y-0 top-32 py-3 lg:py-0 space-y-5 lg:mr-4 2xl:mr-0 w-screen lg:w-full`}>
                         <ul className='flex flex-col lg:flex-row lg:mx-4 2xl:mx-0 space-x-0 space-y-5 lg:space-y-0 lg:space-x-5'>
-                            <li><Link className='cursor-pointer font-sans text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/'}>Home</Link></li>
-                            <li><Link className='cursor-pointer font-sans text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/About'}>About</Link></li>
-                            <li><Link className='cursor-pointer font-sans text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/Contact'}>Contact</Link></li>
-                            <li><Link className='cursor-pointer font-sans text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/Mobile'}>Mobile</Link></li>
-                            <li><Link className='cursor-pointer font-sans text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/Laptop'}>Laptops</Link></li>
-                            <li><Link className='cursor-pointer font-sans text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/BlueTooth'}>Bluetoothes</Link></li>
+                            <li><Link className='cursor-pointer font-[poppins] text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/'}>Home</Link></li>
+                            <li><Link className='cursor-pointer font-[poppins] text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/About'}>About</Link></li>
+                            <li><Link className='cursor-pointer font-[poppins] text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/Contact'}>Contact</Link></li>
+                            <li><Link className='cursor-pointer font-[poppins] text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/Mobile'}>Mobile</Link></li>
+                            <li><Link className='cursor-pointer font-[poppins] text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/Laptop'}>Laptops</Link></li>
+                            <li><Link className='cursor-pointer font-[poppins] text-xl hover:text-purple-600 hover:border-b-[3px] py-1 hover:border-purple-700' href={'/BlueTooth'}>Bluetoothes</Link></li>
                         </ul>
                     </nav>
                     <div ref={cartRef} className={`cart absolute right-0 h-screen top-0 ${Object.keys(cart).length !== 0 ? "translate-x-0" : "translate-x-full"} transition-transform transform z-20 w-screen md:w-[38.8vw] lg:w-[34vw] ${darkMode ? "dark:bg-gray-800 dark:text-white" : "bg-purple-100"}`}>
@@ -83,11 +83,11 @@ const Navbar = ({ darkMode, cart, addToCart, removeFromCart, clearCart, subTotal
                                     <div className='Account absolute rounded-md my-4 px-9 py-4 border-2 border-black -ml-32 bg-purple-100 text-black font-[poppins]'>
                                         <ul className='space-y-4 items-center justify-center text-center mx-auto'>
                                             {localStorage.getItem('myuser') ? <>
-                                                <li className="cursor-pointer hover:text-purple-700 text-lg" onClick={handleRirectToAccount}>Update Account</li>
-                                                <li className="cursor-pointer hover:text-purple-700 text-lg" onClick={handleLogout}>Logout</li>
+                                                <li className="cursor-pointer font-[poppins] hover:text-purple-700 text-lg" onClick={handleRirectToAccount}>Update Account</li>
+                                                <li className="cursor-pointer font-[poppins] hover:text-purple-700 text-lg" onClick={handleLogout}>Logout</li>
                                             </> : <>
-                                                <li className="cursor-pointer hover:text-purple-700 text-lg" onClick={handleRirectToLogin}>Login</li>
-                                                <li className="cursor-pointer hover:text-purple-700 text-lg" onClick={handleRirectToSignUp}>Signup</li>
+                                                <li className="cursor-pointer font-[poppins] hover:text-purple-700 text-lg" onClick={handleRirectToLogin}>Login</li>
+                                                <li className="cursor-pointer font-[poppins] hover:text-purple-700 text-lg" onClick={handleRirectToSignUp}>Signup</li>
 
                                             </>}
                                         </ul>

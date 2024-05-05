@@ -20,7 +20,7 @@ const Post = ({ darkMode, product, buyNow, variants, addToCart }) => {
 
     useEffect(() => {
         if (!localStorage.getItem('myuser')) {
-            router.push('/login')
+            router.push('/Login')
         }
     }, [])
 
