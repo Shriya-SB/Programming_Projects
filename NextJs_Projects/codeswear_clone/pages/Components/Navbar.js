@@ -141,10 +141,10 @@ const Navbar = ({ darkMode, setDarkMode, addToCart, removeFromCart, clearCart, s
                             <>
                                 <div className='bg-pink-400 py-2 text-center justify-center border-2 border-gray-100 items-center rounded-md my-5 px-4 right-20 absolute'>
                                     {!localStorage.getItem('codeswear_token') ? <ul className='space-y-2 px-10'>
-                                        <li className='my-1 font-[poppins] font-semibold text-lg text-black hover:text-gray-100 cursor-pointer'><Link href={`/Login`}>Login</Link></li>
-                                        <li className='my-1 font-[poppins] font-semibold text-lg text-black hover:text-gray-100 cursor-pointer'><Link href={`/Signup`}>Signup</Link></li>
+                                        <li className='my-1 font-[poppins] font-semibold text-lg text-black hover:text-gray-100 cursor-pointer'><Link href={`/Components/Login`}>Login</Link></li>
+                                        <li className='my-1 font-[poppins] font-semibold text-lg text-black hover:text-gray-100 cursor-pointer'><Link href={`/Components/Signup`}>Signup</Link></li>
                                     </ul> : <ul className='space-y-2'>
-                                        <li className='my-1 font-[poppins] font-semibold text-lg text-black hover:text-gray-100 cursor-pointer'><Link href={`/Account`}>Update Account</Link></li>
+                                        <li className='my-1 font-[poppins] font-semibold text-lg text-black hover:text-gray-100 cursor-pointer'><Link href={`/Components/Account`}>Update Account</Link></li>
                                         <li className='my-1 font-[poppins] font-semibold text-lg text-black hover:text-gray-100 cursor-pointer'><Link href={`/`} onClick={handleLogout}>Logout</Link></li>
                                     </ul>}
                                 </div>

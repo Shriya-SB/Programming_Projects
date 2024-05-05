@@ -10,7 +10,7 @@ const Post = ({ addToCart, darkMode, buyNow, variants, product }) => {
     const [color, setColor] = useState(product.color)
     const [size, setSize] = useState(product.size)
     const context = useContext(AppContext)
-    const { pinCode, handleChange, checkPinCodeService, result } = context;
+    const { pinCode, handlePinCodeChange, checkPinCodeService, result } = context;
 
     const availableColors = {
         red: 'bg-red-500',
@@ -119,7 +119,7 @@ const Post = ({ addToCart, darkMode, buyNow, variants, product }) => {
 
                             </div>
                             <div className="flex my-5 flex-col lg:flex-col xl:flex-row md:flex-row">
-                                <input placeholder='Enter Your PinCode..' value={pinCode} onChange={handleChange} type="text" className={`border-2 rounded-full py-2 my-4 px-2 mx-2 ${darkMode ? "dark:bg-gray-500 dark:text-white dark:border-white" : "dark:text-black dark:border-black"}`} id="pinCode" name="pinCode" />
+                                <input placeholder='Enter Your PinCode..' value={pinCode} onChange={handlePinCodeChange} type="text" className={`border-2 rounded-full py-2 my-4 px-2 mx-2 ${darkMode ? "dark:bg-gray-500 dark:text-white dark:border-white" : "dark:text-black dark:border-black"}`} id="pinCode" name="pinCode" />
                                 <button className='bg-pink-500 hover:bg-pink-600 text-white py-2 my-4 rounded-full px-6 mx-2 focus:outline-none' onClick={checkPinCodeService}>Check Serviceability</button>
                             </div>
                             <div className="result h-10">
