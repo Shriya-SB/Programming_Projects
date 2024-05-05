@@ -1,16 +1,28 @@
-export default async function handler(req, res) {
-    try {
-        let pins = {
-            "560072": ["Bengaluru", "Karnataka"],
-            "400001": ["Mumbai", "Maharashtra"],
-            "110001": ["Delhi", "Delhi"],
-            "600001": ['Chennai', 'Tamil Nadu'],
-            "700001": ["KolKata", 'West Bengal'],
-            "12201": ["New York", "Albany"],
+const handler = async (req, res) => {
+    if (req.method === "GET") {
+        try {
+            const { pincode } = req.query;
+            const url = `https://india-pincode-with-latitude-and-longitude.p.rapidapi.com/api/v1/pincode/${pincode}`;
+            const options = {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': process.env.XRapidAPIKey,
+                    'X-RapidAPI-Host': process.env.XRapidAPIHost
+                }
+            };
+            const response = await fetch(url, options);
+            const data = await response.json();
+            if (data && data.length > 0) {
+                res.status(200).json({ success: true, data });
+            } else {
+                res.status(404).json({ success: false, error: 'Pincode not found' });
+            }
+        } catch (error) {
+            res.status(500).json({ error: 'Internal server error' });
         }
-        res.status(201).json(pins)
-    } catch (error) {
-        console.log(error);
-        res.status(401).json({ success: false, error: error })
+    } else {
+        res.status(405).json({ error: 'Method Not Allowed' });
     }
 }
+
+export default handler;

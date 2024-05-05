@@ -12,7 +12,7 @@ const Login = ({ darkMode }) => {
         <>
             <ToastContainer
                 position="top-center"
-                autoClose={4000}
+                autoClose={2500}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
@@ -34,7 +34,7 @@ const Login = ({ darkMode }) => {
                                 <h1 className="text-xl font-bold text-center leading-tight tracking-tight  md:text-2xl ">
                                     Login In Your Account
                                 </h1>
-                                <p>Enter The Cpurpleentials which you entepurple while creating an account.</p>
+                                <p>Enter The credentials which you entered while creating an account.</p>
                                 <form className="space-y-4 md:space-y-6" onSubmit={handleLoginSubmit}>
                                     <div>
                                         <label htmlFor="email" className="block mb-2 text-sm font-medium  ">Email</label>
@@ -48,7 +48,7 @@ const Login = ({ darkMode }) => {
                                 </form>
                                 <button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800 flex items-center justify-center" onClick={handleGoogleSubmit}><FaGoogle className="text-2xl mx-4" /> <p>Login With Google</p></button>
                                 <p className="text-sm font-light dark:text-gray-400">
-                                    Don't have an account? <Link href="/signup" className="font-medium text-purple-600 hover:underline dark:text-purple-500">signup here</Link>
+                                    Don't have an account? <Link href="/Signup" className="font-medium text-purple-600 hover:underline dark:text-purple-500">signup here</Link>
                                 </p>
                             </div>
                         </div>

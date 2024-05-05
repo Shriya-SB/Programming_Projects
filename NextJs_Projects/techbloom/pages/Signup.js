@@ -10,7 +10,7 @@ const Signup = ({ darkMode }) => {
         <>
             <ToastContainer
                 position="top-center"
-                autoClose={4000}
+                autoClose={2500}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
