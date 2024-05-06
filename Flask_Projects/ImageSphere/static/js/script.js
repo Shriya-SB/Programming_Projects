@@ -9,7 +9,7 @@ document.getElementById('imageForm').addEventListener('submit', function (event)
     // Show loading indicator
     var loadingIndicator = document.createElement('p');
     document.getElementById('generate').innerHTML = "Generated Images"
-    loadingIndicator.innerText = 'Loading...';
+    loadingIndicator.innerHTML = '<img src="../static/Logo/loading.gif" alt="Loading">';
     loadingIndicator.classList.add('text-center');
     document.getElementById('imageContainer').appendChild(loadingIndicator);
 
@@ -32,5 +32,9 @@ document.getElementById('imageForm').addEventListener('submit', function (event)
                 imageContainer.appendChild(imgElement);
             });
         })
-        .catch(error => console.error('Error:', error));
+        .catch((error) => {
+            console.error('Error:', error)
+            var imageContainer = document.getElementById('imageContainer');
+            imageContainer.innerHTML = '<p class="text-center">No Images Found</p>';
+    });
 });
