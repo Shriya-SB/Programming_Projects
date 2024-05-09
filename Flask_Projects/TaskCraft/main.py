@@ -1,68 +1,114 @@
-from flask import Flask, render_template, request, redirect
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request, redirect, session, flash
+from flask_pymongo import PyMongo
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
+from bson import ObjectId
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///todo.db'
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db = SQLAlchemy(app)
+app.config["MONGO_URI"] = "mongodb://localhost:27017/taskcraft"
+mongo = PyMongo(app)
+app.secret_key = "NavneetIsAGreatDeveloper"
 
-class Todo(db.Model):
-    sno = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    desc = db.Column(db.String(500), nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def __repr__(self) -> str:
-        return f"{self.sno} - {self.title}"
+# Specify the name of the collection for todos
+TODO_COLLECTION = 'todos'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    if request.method == "POST":
-        title = request.form['title']
-        desc = request.form['desc']
-        todo = Todo(title=title, desc=desc)
-        db.session.add(todo)
-        db.session.commit()
+    if 'useremail' in session:
+        if request.method == "POST":
+            title = request.form['title']
+            desc = request.form['desc']
+            todo = {'title': title, 'desc': desc, 'date_created': datetime.utcnow(), 'useremail': session['useremail']}
+            mongo.db[TODO_COLLECTION].insert_one(todo)
         
-    allTodo = Todo.query.all()
-    return render_template('index.html', allTodo=allTodo)
+        allTodo = list(mongo.db[TODO_COLLECTION].find({'useremail': session['useremail']}))
+        return render_template('index.html', allTodo=allTodo)
+    else:
+        flash('Please log in to access this page', 'error')
+        return redirect('/login')
 
 @app.route('/show')
 def products():
-    allTodo = Todo.query.all()
-    print(allTodo)
-    return "This is product page."
+    if 'useremail' in session:
+        allTodo = list(mongo.db[TODO_COLLECTION].find({'useremail': session['useremail']}))
+        return render_template('show.html', allTodo=allTodo)
+    else:
+        flash('Please log in to access this page', 'error')
+        return redirect('/login')
 
-@app.route('/Update/<int:sno>', methods=["GET", "POST"])
-def Update(sno):
+@app.route('/Update/<string:_id>', methods=["GET", "POST"])
+def Update(_id):
+    if 'useremail' not in session:
+        flash('Please log in to access this page', 'error')
+        return redirect('/login')
+
     if request.method == "POST":
         title = request.form['title']
         desc = request.form['desc']
-        allTodo = Todo.query.filter_by(sno=sno).first()
-        allTodo.title = title
-        allTodo.desc = desc
-        db.session.add(allTodo)
-        db.session.commit()
+        mongo.db[TODO_COLLECTION].update_one({'_id': ObjectId(_id)}, {'$set': {'title': title, 'desc': desc}})
         return redirect("/")
 
-    allTodo = Todo.query.filter_by(sno=sno).first()
+    allTodo = mongo.db[TODO_COLLECTION].find_one({'_id': ObjectId(_id)})
     return render_template('update.html', allTodo=allTodo)
 
-@app.route('/Delete/<int:sno>')
-def Delete(sno):
-    allTodo = Todo.query.filter_by(sno=sno).first()
-    db.session.delete(allTodo)
-    db.session.commit()
-    return redirect("/")
+@app.route('/Delete/<string:_id>')
+def Delete(_id):
+    if 'useremail' not in session:
+        flash('Please log in to access this page', 'error')
+        return redirect('/login')
+    else:
+        mongo.db[TODO_COLLECTION].delete_one({'_id': ObjectId(_id)})
+        return redirect("/")
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        # Get form data
+        username = request.form['username']
+        useremail = request.form['useremail']
+        password = request.form['password']
+        
+        # Check if useremail already exists
+        existing_user = mongo.db.users.find_one({'useremail': useremail})
+        if existing_user:
+            return "Useremail already exists. Please choose a different one."
+        
+        # Hash the password
+        hashed_password = generate_password_hash(password)
+        
+        # Store user information in the database
+        mongo.db.users.insert_one({'username': username, 'useremail': useremail, 'password': hashed_password})
+        
+        # Set useremail in session
+        session['useremail'] = useremail
+        
+        return redirect('/login')
+    
+    return render_template('signup.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Get form data
+        useremail = request.form['useremail']
+        password = request.form['password']
+        
+        # Check if useremail exists
+        user = mongo.db.users.find_one({'useremail': useremail})
+        if user and check_password_hash(user['password'], password):
+            # Set useremail in session
+            session['useremail'] = useremail
+            return redirect('/')
+        else:
+            return "Invalid useremail or password"
+    
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    # Clear user session
+    session.pop('useremail', None)
+    return redirect('/login')
 
 if __name__ == "__main__":
-    # Push Flask application context
-    app.app_context().push()
-    
-    # Create database tables within Flask application context
-    with app.app_context():
-        db.create_all()
-    
-    # Run the Flask application
     app.run(debug=True, port=8000)

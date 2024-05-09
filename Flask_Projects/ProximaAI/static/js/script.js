@@ -1,5 +1,5 @@
-  // Example POST method implementation:
-  async function postData(url = "", data = {}) {
+// Example POST method implementation:
+async function postData(url = "", data = {}) {
     const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -9,12 +9,6 @@
     });
     return response.json();
 }
-
-// Toggle panel visibility
-const handleMenu = () => {
-    let panel = document.getElementById('panel');
-    panel.classList.toggle('hidden');
-};
 
 // Send button click event listener
 document.getElementById("sendButton").addEventListener("click", async (e) => {
@@ -33,7 +27,11 @@ document.getElementById("sendButton").addEventListener("click", async (e) => {
     solution.innerHTML = result.answer;
 });
 
-// Menu button click event listener
-document.querySelector('.menu-button').addEventListener('click', () => {
-    handleMenu();
-});
+// Toggle panel visibility
+const handleMenu = () => {
+    let panel = document.getElementById('panel');
+    panel.classList.toggle('hidden');
+};
+
+
+let menu = document.getElementById('menu-button')

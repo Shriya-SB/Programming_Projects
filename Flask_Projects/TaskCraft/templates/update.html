@@ -4,12 +4,12 @@ Home
 {% endblock title %}
 {% block body %}
 
-<form action="/Update/{{allTodo.sno}}" method="POST">
+<form action="/Update/{{ allTodo._id}}" method="POST">
     <h1 class="text-4xl text-center justify-center my-4" style="font-family: Bree Serif, serif;">Update Todo</h1>
     <div class="container m-auto w-4/5 my-2">
         <div class="mb-3">
             <label for="title" class="block text-sm font-medium text-gray-700">Todo Title</label>
-            <input type="text" id="title" name="title" aria-describedby="emailHelp" value="{{allTodo.title}}"
+            <input type="text" id="title" name="title" value="{{allTodo.title}}"
                 class="mt-1 focus:ring-indigo-500 py-2 focus:outline-none focus:border-indigo-500 focus:border-2 px-3 border border-gray-200 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </div>
         <div class="mb-3">
