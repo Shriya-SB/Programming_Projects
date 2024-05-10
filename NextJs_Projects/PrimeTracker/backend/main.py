@@ -45,14 +45,14 @@ def extract_data():
             content = file.read()
 
             soup = BeautifulSoup(content, 'html.parser')
-            title = soup.title.getText()
+            title = soup.title.getText().split(":")[0]
 
             # Extracting price with error handling
             price_element = soup.find(class_="a-price-whole")
             price = price_element.getText().replace(',', '').replace('.', '') if price_element else "Price not found"
 
-            # Extracting ASIN from file name
-            asin = file_name.split('.')[0]
+            asin_element = soup.find(id="productDetails_detailBullets_sections1")
+            asin = asin_element.find(class_="prodDetAttrValue").getText().strip()
 
             time = datetime.now()
             print(f"File: {file_name}, Title: {title}, Price: {price}, ASIN: {asin}, Time: {time}")
