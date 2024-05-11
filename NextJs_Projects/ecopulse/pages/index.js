@@ -4,7 +4,7 @@ import React from "react";
 export default function Home() {
   return (
     <>
-    Welcome to EcoPulse.
+      Welcome to EcoPulse.
     </>
   );
 }
