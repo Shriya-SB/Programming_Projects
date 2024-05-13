@@ -6,7 +6,7 @@ const About = ({ darkMode }) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (!localStorage.getItem('codeswear_token')) {
+    if (!localStorage.getItem('ecopulse')) {
       router.push("/Login")
     }
   }, [])

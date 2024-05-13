@@ -11,7 +11,47 @@ const Signup = ({ darkMode }) => {
     setCredentials({ ...credentials, [name]: value });
   }
 
-  const handleSigninSubmit = async () => { }
+  const handleSigninSubmit = async (e) => {
+    e.preventDefault()
+    const a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password })
+    })
+    const res = await a.json()
+    if (res.success || res.status === 201) {
+      toast.success('Account Created Successfully!', {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: darkMode ? "dark" : "light",
+
+      });
+      setCredentials({ ...credentials, name: '', email: '', password: '' })
+      setTimeout(() => {
+        router.push('/Components/Login')
+      }, 2500);
+    } else {
+      toast.error('Some Error Occurred!!', {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: darkMode ? "dark" : "light",
+
+      });
+    }
+  }
+
   return (
     <>
       <ToastContainer
@@ -30,8 +70,8 @@ const Signup = ({ darkMode }) => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto filter h-32 w-auto"
-            src="/codeswearcircle.png"
-            alt="codeswear"
+            src="/favicon.ico"
+            alt="ecopulse"
           />
           <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight ">
             Create an new account!!
@@ -41,9 +81,6 @@ const Signup = ({ darkMode }) => {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-0" onSubmit={handleSigninSubmit} method="POST">
             <div>
-              {/* <label htmlFor="name" className="block text-sm font-medium leading-6 ">
-                                Name
-                            </label> */}
               <div className="mt-0">
                 <input
                   onChange={handleChange}
@@ -59,9 +96,6 @@ const Signup = ({ darkMode }) => {
               </div>
             </div>
             <div>
-              {/* <label htmlFor="email" className="block text-sm font-medium leading-6 ">
-                                Email address
-                            </label> */}
               <div className="mt-0">
                 <input
                   onChange={handleChange}
@@ -79,9 +113,6 @@ const Signup = ({ darkMode }) => {
 
             <div>
               <div className="flex items-center justify-between">
-                {/* <label htmlFor="password" className="block text-sm font-medium leading-6 ">
-                                    Password
-                                </label> */}
               </div>
               <div className="mt-0">
                 <input

@@ -11,7 +11,48 @@ const Login = ({ darkMode }) => {
     setCredentials({ ...credentials, [name]: value });
   }
 
-  const handleLoginSubmit = () => { }
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault()
+    const a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email: credentials.email, password: credentials.password })
+    })
+    const res = await a.json()
+    if (res.success || res.status === 201) {
+      toast.success('User logged-in successfully!!', {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: darkMode ? "dark" : "light",
+
+      });
+      localStorage.setItem('ecopulse', JSON.stringify({ token: res.token, email: res.email }))
+      setCredentials({ ...credentials, email: '', password: '' })
+      setTimeout(() => {
+        router.push('/')
+      }, 2500);
+    } else {
+      toast.error('Some Error Occurred!!', {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: darkMode ? "dark" : "light",
+
+      });
+    }
+  }
+
   return (
     <>
       <ToastContainer
@@ -30,8 +71,8 @@ const Login = ({ darkMode }) => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto filter h-32 w-auto"
-            src="/codeswearcircle.png"
-            alt="codeswear"
+            src="/favicon.ico"
+            alt="ecopulse"
           />
           <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight ">
             Log in to your account

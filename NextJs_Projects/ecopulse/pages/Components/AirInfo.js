@@ -2,9 +2,11 @@ import React from 'react'
 
 const AirInfo = () => {
   return (
-    <div>
-      Air Quality page
-    </div>
+    <>
+      <div>
+        Air Quality page
+      </div>
+    </>
   )
 }
 

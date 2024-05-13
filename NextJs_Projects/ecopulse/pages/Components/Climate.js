@@ -2,9 +2,11 @@ import React from 'react'
 
 const Climate = () => {
   return (
-    <div>
-      Climate page
-    </div>
+    <>
+      <div>
+        Climate page
+      </div>
+    </>
   )
 }
 
