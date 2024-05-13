@@ -35,10 +35,13 @@ const Navbar = ({ darkMode, setDarkMode }) => {
                         {account && (
                             <>
                                 <div className='absolute bg-[#4CAF50] right-4 top-4 w-[14vw] py-3 rounded-md'>
-                                    <ul>
+                                    {localStorage.getItem('ecopulse') ? <ul>
                                         <li className='text-lg text-center hover:text-green-300 cursor-pointer items-center justify-center'>Update Account</li>
                                         <li className='text-lg text-center hover:text-green-300 cursor-pointer items-center justify-center'>Logout</li>
-                                    </ul>
+                                    </ul> : <ul>
+                                        <li className='text-lg text-center hover:text-green-300 cursor-pointer items-center justify-center'><Link href={'/Components/Login'}>Login</Link></li>
+                                        <li className='text-lg text-center hover:text-green-300 cursor-pointer items-center justify-center'><Link href={'/Components/Signup'}>Signup</Link></li>
+                                    </ul>}
                                 </div>
                             </>
                         )}

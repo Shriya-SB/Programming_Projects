@@ -1,9 +1,11 @@
 import Link from 'next/link'
-import React from 'react'
-import { ToastContainer } from 'react-toastify'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const Login = ({ darkMode }) => {
+  const router = useRouter()
   const [credentials, setCredentials] = useState({ email: '', password: '' })
 
   const handleChange = (e) => {
@@ -95,7 +97,7 @@ const Login = ({ darkMode }) => {
                   autoComplete="email"
                   required
                   placeholder="Enter your email.."
-                  className={`block w-full rounded-md px-2 ${darkMode ? "dark:bg-gray-500 dark:text-white" : ""} border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6`}
+                  className={`block w-full rounded-md px-2 ${darkMode ? "dark:bg-gray-500 dark:text-white" : ""} border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6`}
                 />
               </div>
             </div>
@@ -112,7 +114,7 @@ const Login = ({ darkMode }) => {
                   autoComplete="current-password"
                   required
                   placeholder="Enter your password.."
-                  className={`block w-full rounded-md px-2 ${darkMode ? "dark:bg-gray-500 dark:text-white" : ""} border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-600 sm:text-sm sm:leading-6`}
+                  className={`block w-full rounded-md px-2 ${darkMode ? "dark:bg-gray-500 dark:text-white" : ""} border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6`}
                 />
               </div>
             </div>
@@ -120,30 +122,22 @@ const Login = ({ darkMode }) => {
             <div>
               <button
                 type="submit"
-                className="flex my-4 w-full justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
+                className="flex my-4 w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
               >
                 Login
               </button>
             </div>
             <div className="flex items-center justify-between">
               <div className="text-sm">
-                <a href="#" className="font-semibold text-pink-600 hover:text-pink-500">
+                <a href="#" className="font-semibold text-green-600 hover:text-green-500">
                   Forgot password?
                 </a>
               </div>
             </div>
           </form>
-          <button
-            type="submit"
-            className="flex my-4 w-full justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
-            onClick={() => signInWithGoogle()}
-          >
-            <FcGoogle className='text-xl mr-3 my-1' />
-            Signin With Google
-          </button>
           <p className="mt-1 text-sm ">
             Don't have an account?{' '}
-            <Link href="/Components/Signup" className="font-semibold leading-6 text-pink-600 hover:text-pink-500">
+            <Link href="/Components/Signup" className="font-semibold leading-6 text-green-600 hover:text-green-500">
               Signup
             </Link>
           </p>
