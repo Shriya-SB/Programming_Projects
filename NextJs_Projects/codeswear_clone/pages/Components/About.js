@@ -88,7 +88,7 @@ const About = ({ darkMode }) => {
                   experience the future of online shopping.
                 </p>
                 <div className="flex justify-center">
-                  <button onClick={() => router.push('/Tshirts')} className="inline-flex text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none cursor-pointer hover:bg-pink-600 rounded text-lg">
+                  <button onClick={() => router.push('/Components/Tshirts')} className="inline-flex text-white bg-pink-500 border-0 py-2 px-6 focus:outline-none cursor-pointer hover:bg-pink-600 rounded text-lg">
                     Start Shopping
                   </button>
                 </div>
