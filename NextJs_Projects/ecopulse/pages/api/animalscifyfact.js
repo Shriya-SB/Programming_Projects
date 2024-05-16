@@ -1,8 +1,8 @@
 import connectDb from "./mongoose";
 
 const handler = async (req, res) => {
-    const { animal } = req.body
-    const url = `https://animals-by-api-ninjas.p.rapidapi.com/v1/animals?name=${animal}`;
+    const { name } = req.query;
+    const url = `https://animals-by-api-ninjas.p.rapidapi.com/v1/animals?name=${name}`;
     const options = {
         method: 'GET',
         headers: {
@@ -13,12 +13,13 @@ const handler = async (req, res) => {
 
     try {
         const response = await fetch(url, options);
-        const result = await response.text();
+        const result = await response.json();
         console.log(result);
-        res.status(201).json({ success: true, result: result })
+        res.status(200).json({ success: true, result });
     } catch (error) {
         console.error(error);
+        res.status(500).json({ success: false, error: 'Internal Server Error' });
     }
-}
+};
 
-export default connectDb(handler)
+export default connectDb(handler);
