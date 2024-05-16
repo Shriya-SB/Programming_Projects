@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-export default function AnimalSciFyFact({ darkMode }) {
+const AnimalSciFyFact = ({ initialData, darkMode }) => {
   const [animalName, setAnimalName] = useState('');
-  const [animalData, setAnimalData] = useState(null);
+  const [animalData, setAnimalData] = useState(initialData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchData = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setLoading(true);
     setError(null);
 
     try {
       const response = await fetch(`/api/animalscifyfact?name=${animalName}`);
       const data = await response.json();
-      console.log(data);
+
       if (data.success && data.result.length > 0) {
         setAnimalData(data.result[0]); // Access the first element of the result array
       } else {
@@ -27,78 +28,13 @@ export default function AnimalSciFyFact({ darkMode }) {
     }
   };
 
-  useEffect(() => {
-    if (animalName) {
-      fetchData();
-    }
-  }, [animalName]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setAnimalData(null);
-    setError(null);
-    setLoading(true);
-    // setAnimalName('');
-    fetchData();
-  };
-
-  const renderAnimalInfo = () => {
-    if (!animalData) return null;
-
-    const { name, taxonomy, locations, characteristics } = animalData;
-
-    const capitalizeFirstLetter = (str) => {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    };
-
-    const formatKey = (key) => {
-      return capitalizeFirstLetter(key.replace(/_/g, ' '));
-    };
-
-    return (
-      <div className={`animal-info ${darkMode ? "bg-gray-800 text-white" : "bg-green-50"}`}>
-        <h2 className='text-2xl font-semibold mb-4'>Name Of Animal: {name}</h2>
-        {taxonomy && (
-          <div className="taxonomy">
-            <h3>Taxonomy</h3>
-            <ul className='space-y-4 text-lg'>
-              {Object.entries(taxonomy).map(([key, value]) => (
-                <li key={key}><strong>{formatKey(key)}:</strong> {value}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {locations && (
-          <div className="locations">
-            <h3>Locations</h3>
-            <ul className='space-y-4 text-lg'>
-              {locations.map((location, index) => (
-                <li key={index}>{index + 1}) {location}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {characteristics && (
-          <div className="characteristics">
-            <h3>Characteristics</h3>
-            <ul className='space-y-4'>
-              {Object.entries(characteristics).map(([key, value]) => (
-                <li key={key} className='text-lg'><strong>{formatKey(key)}:</strong> {value}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-    );
-  };
-
   return (
-    <div className={`${darkMode ? "bg-gray-700 text-white " : "bg-green-50"}`}>
+    <div className={`${darkMode ? 'bg-gray-700 text-white' : 'bg-green-50'}`}>
       <div className={`animal-sci-fy-fact-container min-h-screen`}>
         <form className='animal_form' onSubmit={handleSubmit}>
           <label className='animal_label ml-2' htmlFor="animalName">Enter the name of the animal:</label>
           <div className="flex items-center mb-4">
-            <input className={`animal_input ml-2 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:border-green-500 ${darkMode ? "bg-gray-500 text-white" : ""}`}
+            <input className={`animal_input ml-2 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:border-green-500 ${darkMode ? 'bg-gray-500 text-white' : ''}`}
               type="text"
               id="animalName"
               placeholder="E.g., Lion, Elephant, Tiger"
@@ -110,8 +46,74 @@ export default function AnimalSciFyFact({ darkMode }) {
         </form>
         {loading && <p>Loading...</p>}
         {error && <p className="error-message">Error: {error}</p>}
-        {renderAnimalInfo()}
+        {animalData && (
+          <div className={`animal-info ${darkMode ? 'bg-gray-800 text-white' : 'bg-green-50'}`}>
+            <h2 className='text-2xl font-semibold mb-4'>Name Of Animal: {animalData.name}</h2>
+            {animalData.taxonomy && (
+              <div className="taxonomy">
+                <h3>Taxonomy</h3>
+                <ul className='space-y-4 text-lg'>
+                  {Object.entries(animalData.taxonomy).map(([key, value]) => (
+                    <li key={key}><strong>{key.replace(/_/g, ' ')}:</strong> {value}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {animalData.locations && (
+              <div className="locations">
+                <h3>Locations</h3>
+                <ul className='space-y-4 text-lg'>
+                  {animalData.locations.map((location, index) => (
+                    <li key={index}>{index + 1}) {location}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {animalData.characteristics && (
+              <div className="characteristics">
+                <h3>Characteristics</h3>
+                <ul className='space-y-4'>
+                  {Object.entries(animalData.characteristics).map(([key, value]) => (
+                    <li key={key} className='text-lg'><strong>{key.replace(/_/g, ' ')}:</strong> {value}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
-}
+};
+
+export const getServerSideProps = async ({ query }) => {
+  const { name } = query;
+
+  try {
+    const response = await fetch(`/api/animalscifyfact?name=${name}`);
+    const data = await response.json();
+
+    if (data.success && data.result.length > 0) {
+      return {
+        props: {
+          initialData: data.result[0],
+        },
+      };
+    } else {
+      return {
+        props: {
+          initialData: null,
+        },
+      };
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return {
+      props: {
+        initialData: null,
+      },
+    };
+  }
+};
+
+export default AnimalSciFyFact;
