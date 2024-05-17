@@ -6,8 +6,8 @@ const handler = async (req, res) => {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '5e0b58d473mshe8d525e781c02d1p1bde9fjsnc6b41a538d30',
-            'X-RapidAPI-Host': 'animals-by-api-ninjas.p.rapidapi.com'
+            'X-RapidAPI-Key': process.env.X_RapidAPI_KEY,
+            'X-RapidAPI-Host': process.env.X_RapidAPI_HOST_Animal
         }
     };
 
