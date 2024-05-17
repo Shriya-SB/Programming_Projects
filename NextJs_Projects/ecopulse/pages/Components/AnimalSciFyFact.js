@@ -1,6 +1,14 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 const AnimalSciFyFact = ({ initialData, darkMode }) => {
+  const router = useRouter()
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem('ecopulse'));
+    if (!token) {
+      router.push('/Components/Login')
+    }
+  }, [])
   const [animalName, setAnimalName] = useState('');
   const [animalData, setAnimalData] = useState(initialData);
   const [loading, setLoading] = useState(false);

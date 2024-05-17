@@ -1,37 +1,86 @@
-import React, { useState, useEffect } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import { useRouter } from 'next/router'
+import React, { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
 
 const Account = ({ darkMode }) => {
-  const [credentials, setCredentials] = useState({ name: '', email: '', password: '', npassword: '', cpassword: '', city: '', state: '', pinCode: '', address: '', phone: '', user: null })
-  const router = useRouter()
-  useEffect(() => {
-    let myUser = JSON.parse(localStorage.getItem('ecopulse'))
-    if (!myUser) {
-      router.push("/Components/Login")
-    } else {
-      setCredentials({ ...credentials, email: myUser.email, user: myUser })
-      fetchData(myUser.token)
-    }
-  }, [])
+  const [credentials, setCredentials] = useState({
+    name: '',
+    email: '',
+    password: '',
+    npassword: '',
+    cpassword: '',
+    city: '',
+    state: '',
+    pinCode: '',
+    address: '',
+    phone: '',
+    user: null
+  });
+  const router = useRouter();
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    let myUser = JSON.parse(localStorage.getItem('ecopulse'));
+    console.log(myUser);
+    if (!myUser) {
+      router.push("/Components/Login");
+    } else {
+      setCredentials(prevState => ({ ...prevState, email: myUser.email, user: myUser }));
+      fetchData(myUser.token);
+    }
+  }, []);
+
+  const handleChange = async (e) => {
     const { name, value } = e.target;
-    setCredentials({ ...credentials, [name]: value })
-  }
+    setCredentials(prevState => ({ ...prevState, [name]: value }));
+
+    if (name === "pinCode" && value.length === 6) {
+      try {
+        const req = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pinCode?pincode=${value}`);
+        const res = await req.json();
+        console.log(res);
+        if (res.success) {
+          if (res.data && res.data.length > 0) {
+            setCredentials(prevState => ({
+              ...prevState,
+              state: res.data[0].state,
+              city: res.data[0].district
+            }));
+          } else {
+            setCredentials(prevState => ({ ...prevState, city: '', state: '' }));
+          }
+        } else {
+          console.error('Error fetching pincode data:', res.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching pincode data:', error);
+      }
+    }
+  };
 
   const handleUpdateUserSubmit = async (e) => {
-    e.preventDefault()
-    let data = { token: user.token, name: credentials.name, address: credentials.address, pinCode: credentials.pinCode, city: credentials.city, state: credentials.state, phone: credentials.phone }
+    e.preventDefault();
+    console.log('Credentials before submit:', credentials); // Log the state before submission
+
+    let data = {
+      token: credentials.user,
+      name: credentials.name,
+      address: credentials.address,
+      pinCode: credentials.pinCode,
+      city: credentials.city,
+      state: credentials.state,
+      phone: credentials.phone
+    };
+
     let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/updateuser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    })
-    const b = await a.json()
+    });
+
+    const b = await a.json();
     if (b.success || b.status === 201) {
       toast.success('User credentials updated successfully!!', {
         position: "top-center",
@@ -41,8 +90,7 @@ const Account = ({ darkMode }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkMode ? "dark" : "light",
-
+        theme: darkMode ? "dark" : "light"
       });
     } else {
       toast.error('Some Error Occurred!!', {
@@ -53,23 +101,29 @@ const Account = ({ darkMode }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkMode ? "dark" : "light",
-
+        theme: darkMode ? "dark" : "light"
       });
     }
-  }
+  };
 
   const handleUpdatePasswordSubmit = async (e) => {
-    e.preventDefault()
-    let data = { token: user.token, password, cpassword, npassword }
+    e.preventDefault();
+    let data = {
+      token: credentials.user,
+      password: credentials.password,
+      cpassword: credentials.cpassword,
+      npassword: credentials.npassword
+    };
+
     let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/updatepassword`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    })
-    const b = await a.json()
+    });
+
+    const b = await a.json();
     if (b.success || b.status === 201) {
       toast.success('User password updated successfully!!', {
         position: "top-center",
@@ -79,10 +133,9 @@ const Account = ({ darkMode }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkMode ? "dark" : "light",
-
+        theme: darkMode ? "dark" : "light"
       });
-      setCredentials({ ...credentials, password: '', cpassword: '', npassword: '' })
+      setCredentials({ ...credentials, password: '', cpassword: '', npassword: '' });
     } else {
       toast.error('Some Error Occurred!!', {
         position: "top-center",
@@ -92,25 +145,35 @@ const Account = ({ darkMode }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: darkMode ? "dark" : "light",
+        theme: darkMode ? "dark" : "light"
       });
     }
-  }
-
+  };
 
   const fetchData = async (token) => {
-    let data = { token: token }
+    let data = { token: token };
     let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
-    })
-    const b = await a.json()
+    });
+
+    const b = await a.json();
     console.log(b);
-    setCredentials({ ...credentials, name: b.name, email: b.email, city: b.city, state: b.state, phone: b.phone, address: b.address })
-  }
+    setCredentials(prevState => ({
+      ...prevState,
+      name: b.name || '',
+      email: b.email || '',
+      city: b.city || '',
+      state: b.state || '',
+      phone: b.phone || '',
+      address: b.address || '',
+      pinCode: b.pinCode || '',
+      user: token
+    }));
+  };
 
   return (
     <>
@@ -181,7 +244,7 @@ const Account = ({ darkMode }) => {
               </div>
             </div>
           </div>
-          <button type='submit' className='bg-green-500 cursor-pointer hover:bg-green-600 px-6 py-1 text-center rounded mx-2'>Submit</button>
+          <button type='submit' className='bg-green-500 cursor-pointer text-white hover:bg-green-600 px-6 py-1 text-center rounded mx-2'>Submit</button>
         </form>
         <p className="font-semibold my-4 text-lg mx-2">2. Update Password</p>
         <form onSubmit={handleUpdatePasswordSubmit}>
@@ -205,7 +268,7 @@ const Account = ({ darkMode }) => {
               </div>
             </div>
           </div>
-          <button type='submit' className='bg-green-500 cursor-pointer hover:bg-green-600 px-6 py-1 text-center rounded mx-2'>Submit</button>
+          <button type='submit' className='bg-green-500 cursor-pointer text-white hover:bg-green-600 px-6 py-1 text-center rounded mx-2'>Submit</button>
         </form>
       </div>
     </>

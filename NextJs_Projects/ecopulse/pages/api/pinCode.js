@@ -6,12 +6,13 @@ const handler = async (req, res) => {
             const options = {
                 method: 'GET',
                 headers: {
-                    'X-RapidAPI-Key': process.env.XRapidAPIKey,
-                    'X-RapidAPI-Host': process.env.XRapidAPIHost
+                    'X-RapidAPI-Key': '5e0b58d473mshe8d525e781c02d1p1bde9fjsnc6b41a538d30',
+                    'X-RapidAPI-Host': 'india-pincode-with-latitude-and-longitude.p.rapidapi.com'
                 }
             };
             const response = await fetch(url, options);
             const data = await response.json();
+            console.log(data);
             if (data && data.length > 0) {
                 res.status(200).json({ success: true, data });
             } else {

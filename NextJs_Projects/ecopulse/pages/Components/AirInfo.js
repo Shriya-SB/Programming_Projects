@@ -1,6 +1,15 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 const AirInfo = ({ initialData }) => {
+  const router = useRouter()
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem('ecopulse'));
+    if (!token) {
+      router.push('/Components/Login')
+    }
+  }, [])
+
   const [city, setCity] = useState('');
   const [airQualityData, setAirQualityData] = useState(initialData);
   const [loading, setLoading] = useState(false);

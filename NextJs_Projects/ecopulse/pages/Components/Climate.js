@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { format } from 'date-fns';
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/climate`);
@@ -21,6 +22,13 @@ export async function getServerSideProps() {
 }
 
 const Climate = ({ articles, error, darkMode }) => {
+  const router = useRouter()
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem('ecopulse'));
+    if (!token) {
+      router.push('/Components/Login')
+    }
+  }, [])
   return (
     <div className={`min-h-screen p-4 ${darkMode ? 'bg-gray-800 text-white' : 'bg-green-50 text-black'}`}>
       <h1 className="text-5xl underline italic text-center my-4 font-bold mb-6" style={{ fontFamily: 'Bree Serif, serif' }}>Climate News</h1>

@@ -23,6 +23,11 @@ const userSchema = new Schema({
         type: String,
         default: ''
     },
+    phone: {
+        type: Number,
+        default: '',
+        unique: true
+    },
     city: {
         type: String,
         default: ''
