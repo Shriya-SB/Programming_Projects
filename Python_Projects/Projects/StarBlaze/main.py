@@ -28,10 +28,10 @@ def load_assets():
     current_dir = os.path.dirname(__file__)
     assets = {
         "player_img": load_image(os.path.join(current_dir, "assets/img/player.png"), (40, 40)),
-        "enemy_img": load_image(os.path.join(current_dir, "assets/img/enemy_game_spider.png"), (64, 64)),
+        "enemy_img": load_image(os.path.join(current_dir, "assets/img/spider.png"), (64, 64)),
         "bullet_img": load_image(os.path.join(current_dir, "assets/img/bullet.png"), (16, 45)),
-        "background_img": load_image(os.path.join(current_dir, "assets/img/bg.png"), (GAME_WIDTH, GAME_HEIGHT)),
-        "explosion_sound": load_sound(os.path.join(current_dir, "assets/sounds/collision.ogg"))
+        "background_img": load_image(os.path.join(current_dir, "assets/img/background.png"), (GAME_WIDTH, GAME_HEIGHT)),
+        "explosion_sound": load_sound(os.path.join(current_dir, "assets/sounds/bullet_sound.ogg"))
     }
     return assets
 
@@ -66,9 +66,9 @@ def draw(player_x, player_y):
 def game_over():
     window.fill((0, 0, 0))
     game_over_text = font.render("Game Over. Your Score: " + str(score), True, (255, 255, 255))
-    replay_text = font.render("Press 'R' to replay or 'Q' to quit.", True, (255, 255, 255))
+    replay_text = font.render("Press 'R' to replay or 'Q' to quit.", True, (255, 10, 255))
     window.blit(game_over_text, (GAME_WIDTH // 2 - 200, GAME_HEIGHT // 2 - 30))
-    window.blit(replay_text, (GAME_WIDTH // 2 - 200, GAME_HEIGHT // 2 + 30))
+    window.blit(replay_text, (GAME_WIDTH // 2 - 260, GAME_HEIGHT // 2 + 30))
     pygame.display.update()
     # If User press r or q to manipulate game.
     while True:
