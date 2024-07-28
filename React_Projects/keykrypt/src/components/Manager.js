@@ -1,106 +1,104 @@
-import React, { useEffect, useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
-import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
+import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Manager = () => {
-    const [form, setForm] = useState({ username: '', webname: '', password: '' })
-    const [PasswordArray, setPasswordArray] = useState([])
-    const navigate = useNavigate()
+    const [form, setForm] = useState({ username: '', webname: '', password: '' });
+    const [PasswordArray, setPasswordArray] = useState([]);
+    const [passwordLengths, setPasswordLengths] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
-        let user = JSON.parse(localStorage.getItem('keykrypt'))
+        let user = JSON.parse(localStorage.getItem('keykrypt'));
         if (user && user.token) {
-            getPasswords()
+            getPasswords();
         } else {
-            navigate('/login')
+            navigate('/login');
         }
-    }, [])
+    }, []);
 
-    // Update getPasswords function to ensure data is an array of objects before setting the state
     const getPasswords = async () => {
         try {
             let req = await fetch('/getpasswords');
             let res = await req.json();
-            console.log(res);
 
-            // Ensure res.result is an array of objects before setting the state
             if (Array.isArray(res.result) && res.result.every(entry => typeof entry === 'object')) {
                 setPasswordArray(res.result);
+
+                // Calculate password lengths
+                let lengths = {};
+                for (let item of res.result) {
+                    const decryptedPassword = await decryptPassword(item.password);
+                    lengths[item.id] = decryptedPassword.length;
+                }
+                setPasswordLengths(lengths);
             } else {
                 console.error("Data received from server is not an array of objects:", res);
             }
         } catch (error) {
             console.error('Error fetching passwords:', error);
         }
-    }
+    };
 
-
+    const decryptPassword = async (encryptedPassword) => {
+        try {
+            const req = await fetch('/decryptpassword', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({ encryptedPassword })
+            });
+            const res = await req.json();
+            return res.success ? res.decryptedPassword : '';
+        } catch (error) {
+            console.error('Error decrypting password:', error);
+            return '';
+        }
+    };
 
     const savePassword = async (e) => {
-        try {
-            e.preventDefault();
-            const { id, ...formData } = form;
+        e.preventDefault();
+        const { id, ...formData } = form;
 
-            if (id) {
-                // Editing existing password
-                const req = await fetch('/addpasswords', {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": 'application/json'
-                    },
-                    body: JSON.stringify({ ...formData, id })
-                });
-                const res = await req.json();
+        if (id) {
+            const req = await fetch('/addpasswords', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({ ...formData, id })
+            });
+            const res = await req.json();
 
-                if (Array.isArray(res.result)) {
-                    setPasswordArray(res.result);
-                    setForm({ username: '', password: '', webname: '' });
-                    toast.success('Password Edited Successfully!!', {
-                        position: "top-right",
-                        autoClose: 4000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored"
-                    });
-                } else {
-                    console.error("Data received from server is not an array:", res.result);
-                }
+            if (Array.isArray(res.result)) {
+                setPasswordArray(res.result);
+                setForm({ username: '', password: '', webname: '' });
+                toast.success('Password Edited Successfully!!');
             } else {
-                // Adding new password
-                const req = await fetch('/addpasswords', {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": 'application/json'
-                    },
-                    body: JSON.stringify({ ...formData, id: uuidv4() })
-                });
-                const res = await req.json();
-
-                if (Array.isArray(res.result)) {
-                    setPasswordArray(res.result);
-                    setForm({ username: '', password: '', webname: '' });
-                    toast.success('Password Added Successfully!!', {
-                        position: "top-right",
-                        autoClose: 4000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored"
-                    });
-                } else {
-                    console.error("Data received from server is not an array:", res.result);
-                }
+                console.error("Data received from server is not an array:", res.result);
             }
-        } catch (error) {
-            console.error('Error saving password:', error);
+        } else {
+            const req = await fetch('/addpasswords', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({ ...formData, id: uuidv4() })
+            });
+            const res = await req.json();
+
+            if (Array.isArray(res.result)) {
+                setPasswordArray(res.result);
+                setForm({ username: '', password: '', webname: '' });
+                toast.success('Password Added Successfully!!');
+            } else {
+                console.error("Data received from server is not an array:", res.result);
+            }
         }
-    }
+    };
 
     const deletePassword = async (id) => {
         try {
@@ -113,47 +111,41 @@ const Manager = () => {
             });
             const res = await req.json();
             if (Array.isArray(res.result)) {
-                setPasswordArray(res.result); // Update PasswordArray directly with the new data
-                toast.success('Password Deleted Successfully!!', {
-                    position: "top-right",
-                    autoClose: 4000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored"
-                });
+                setPasswordArray(res.result);
+                toast.success('Password Deleted Successfully!!');
             } else {
                 console.error("Data received from server is not an array:", res.result);
             }
-            console.log(res);
         } catch (error) {
             console.error('Error deleting password:', error);
         }
-    }
+    };
 
+    const copyPassword = async (encryptedPassword) => {
+        try {
+            const req = await fetch('/decryptpassword', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify({ encryptedPassword })
+            });
+            const res = await req.json();
 
-    const copyPassword = (item) => {
-        navigator.clipboard.writeText(item)
-        toast.success('Password Copied Successfully!!', {
-            position: "top-right",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored"
-        });
-    }
+            if (res.success) {
+                navigator.clipboard.writeText(res.decryptedPassword);
+                toast.success('Password Copied Successfully!!');
+            } else {
+                console.error("Failed to decrypt password:", res.message);
+            }
+        } catch (error) {
+            console.error('Error decrypting password:', error);
+        }
+    };
 
     const editPassword = async (id) => {
         try {
-            // Delete the existing password from the database
             await deletePassword(id);
-
-            // Find the password to edit and populate the form fields
             const passwordToEdit = PasswordArray.find(item => item.id === id);
             if (passwordToEdit) {
                 setForm({ ...passwordToEdit });
@@ -161,12 +153,12 @@ const Manager = () => {
         } catch (error) {
             console.error('Error editing password:', error);
         }
-    }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setForm({ ...form, [name]: value })
-    }
+        setForm({ ...form, [name]: value });
+    };
 
     return (
         <>
@@ -214,12 +206,12 @@ const Manager = () => {
                             </tr>
                         </thead>
                         <tbody className='bg-teal-200 border'>
-                            {PasswordArray.map((item, index) => {
-                                return <tr key={index}>
+                            {PasswordArray.map((item, index) => (
+                                <tr key={index}>
                                     <td className='text-center border lg:text-xl text-md py-1'>{item.username}</td>
                                     <td className='text-center border lg:text-xl text-md py-1'>{item.webname}</td>
                                     <td className='text-center border space-x-4 flex items-center text-2xl justify-center py-1'>
-                                        <p>{"*".repeat(item.password.length)}</p>
+                                        <p>{'*'.repeat(passwordLengths[item.id] || 0)}</p>
                                         <span onClick={() => editPassword(item.id)}>
                                             <lord-icon
                                                 src="https://cdn.lordicon.com/vzolctzz.json"
@@ -241,10 +233,8 @@ const Manager = () => {
                                         </span>
                                     </td>
                                 </tr>
-                            })}
-
+                            ))}
                         </tbody>
-
                     </table>}
                 </div>
             </div >
