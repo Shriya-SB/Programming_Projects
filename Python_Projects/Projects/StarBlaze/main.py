@@ -11,7 +11,7 @@ pygame.init()
 GAME_WIDTH = 870
 GAME_HEIGHT = 600
 window = pygame.display.set_mode((GAME_WIDTH, GAME_HEIGHT))
-pygame.display.set_caption("Space Shooter")
+pygame.display.set_caption("StarBlaze")
 
 # Load images and sounds
 def load_image(file_name, size=None):
@@ -39,7 +39,7 @@ def load_assets():
 clock = pygame.time.Clock()
 
 # Game parameters
-player_speed = 5
+player_speed = 6
 bullet_speed = 10
 enemy_speed = 3
 score = 0
@@ -78,6 +78,9 @@ def game_over():
                     return True
                 elif event.key == pygame.K_q:
                     return False
+            elif event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
 
 # Main game loop
 assets = load_assets()
@@ -89,12 +92,14 @@ while replay:
     player_x = GAME_WIDTH // 2 - assets["player_img"].get_width() // 2
     player_y = GAME_HEIGHT - 100
     enemy_spawn_counter = enemy_spawn_delay
+    key_state = {}
     running = True
 
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
+                exit()
             elif event.type == pygame.KEYDOWN:
                 key_state[event.key] = True
                 if event.key == pygame.K_SPACE:
@@ -110,6 +115,7 @@ while replay:
         player_x = max(0, min(player_x, GAME_WIDTH - assets["player_img"].get_width()))
         player_y = max(0, min(player_y, GAME_HEIGHT - assets["player_img"].get_height()))
 
+        bullets = [bullet for bullet in bullets if bullet[1] > 0]
         for bullet in bullets:
             bullet[1] -= bullet_speed
 
