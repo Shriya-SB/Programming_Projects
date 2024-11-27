@@ -48,7 +48,7 @@ def qa():
             }
            headers = {
                 "content-type": "application/json",
-                "X-RapidAPI-Key": "5e0b58d473mshe8d525e781c02d1p1bde9fjsnc6b41a538d30",
+                "X-RapidAPI-Key": "6b604a5618msh51d452bd75dbc8dp10c7dfjsn977191b38294",
                 "X-RapidAPI-Host": "open-ai21.p.rapidapi.com"
             }
 

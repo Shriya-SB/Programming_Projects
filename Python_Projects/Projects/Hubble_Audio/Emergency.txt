@@ -1,0 +1,39 @@
+Navneet's API: (
+    url = "https://chatgpt-42.p.rapidapi.com/gpt4"
+
+payload = {
+	"messages": [
+		{
+			"role": "user",
+			"content": query
+		}
+	],
+	"web_access": True
+}
+headers = {
+	"x-rapidapi-key": "5e0b58d473mshe8d525e781c02d1p1bde9fjsnc6b41a538d30",
+	"x-rapidapi-host": "chatgpt-42.p.rapidapi.com",
+	"Content-Type": "application/json"
+}
+)
+
+
+
+Sridevi's API: (
+    url = "https://chatgpt-42.p.rapidapi.com/gpt4"
+
+payload = {
+	"messages": [
+		{
+			"role": "user",
+			"content": query
+		}
+	],
+	"web_access": True
+}
+headers = {
+	"x-rapidapi-key": "eea465718cmsh355cb1ad58074dbp1dc31fjsna5bc5500db63",
+	"x-rapidapi-host": "chatgpt-42.p.rapidapi.com",
+	"Content-Type": "application/json"
+}
+)
